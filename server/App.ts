@@ -3,12 +3,22 @@ import express from "express";
 class App {
     private app: express.Application;
     private port: number;
+    private db: any 
 
-    constructor(appConfig : { port: number, middlewares: Array<any>, routes: Array<any>}){
+    constructor(appConfig : { 
+        port: number
+        , middlewares: Array<any>
+        , routes: Array<any>
+        , db: any
+        ,}){
         this.app = express();
         this.port = appConfig.port;
         this.applyMiddlewares(appConfig.middlewares);
-        this.applyRoutes(appConfig.routes);
+        this.applyDB(appConfig.db);
+    }
+
+    private async applyDB(db: any){
+        await this.db.connect();
     }
 
     private applyMiddlewares(middlewares: any){

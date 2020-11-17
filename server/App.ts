@@ -3,22 +3,27 @@ import express from "express";
 class App {
     private app: express.Application;
     private port: number;
-    private db: any 
 
     constructor(appConfig : { 
         port: number
         , middlewares: Array<any>
         , routes: Array<any>
         , db: any
-        ,}){
+        , envConfig: any}){
         this.app = express();
         this.port = appConfig.port;
         this.applyMiddlewares(appConfig.middlewares);
         this.applyDB(appConfig.db);
+        this.enableConfig(appConfig.envConfig);
+        this.applyRoutes(appConfig.routes);
+    }
+
+    private enableConfig(envConfig: any){
+        envConfig.enable();
     }
 
     private async applyDB(db: any){
-        await this.db.connect();
+        await db.connect();
     }
 
     private applyMiddlewares(middlewares: any){

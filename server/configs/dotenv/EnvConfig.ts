@@ -7,4 +7,6 @@ class EnvConfigs{
     }
 }
 
+
+
 export default EnvConfigs;

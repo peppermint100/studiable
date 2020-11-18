@@ -1,24 +1,12 @@
 import "reflect-metadata";
 import { Connection, createConnection } from "typeorm";
+import dbConfig from "../configs/db/dbConfig";
 
 class db {
     private connection: Promise<Connection>;
-
     constructor(){
         this.connection = new Promise((resolve, reject) => {
-            createConnection({
-                type: "mysql",
-                host: "localhost",
-                port: 3306,
-                username: "root",
-                password: "root",
-                database: "studiable",
-                entities: [
-                    "./entities/**/*.ts"
-                ],
-                synchronize: true,
-                logging: true
-            }).then( res => {
+            createConnection(dbConfig).then( res => {
                 resolve(res);
             }).catch(err => {
                 if(err){

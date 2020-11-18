@@ -24,5 +24,4 @@ export class Comment{
 
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
     createdAt!: Date;
-
 }

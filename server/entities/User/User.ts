@@ -1,10 +1,10 @@
 import { Comment } from './../Comment/Comment';
 import { Cafe } from './../Cafe/Cafe';
-import { Column, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Like } from '../Like/Like';
 
 @Entity()
-export class User{
+export class User extends BaseEntity{
 
     @PrimaryGeneratedColumn("uuid")
     userId!: string;

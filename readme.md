@@ -1,6 +1,16 @@
 ## Description
 ☕☕ Find and Share studiable coffeeshop. 
 
+## Todo
+- [ ] env settings
+- [ ] entity 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+
+
 ## Stack
 #### Front
 - Typescript

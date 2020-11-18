@@ -1,5 +1,7 @@
+import { Comment } from './../Comment/Comment';
 import { Cafe } from './../Cafe/Cafe';
 import { Column, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Like } from '../Like/Like';
 
 @Entity()
 export class User{
@@ -19,16 +21,18 @@ export class User{
     // cafePosted
     // to do some relation stuff added joinColumn but Cafe entity doesn't really make changes about User so I didn't add joinColumn on the other side
     @Column({ default: []})
-    cafeId!: number;
     @OneToMany(type => Cafe, cafe => cafe.writer)
-    @JoinColumn({ name: "cafeId"})
     cafePosted!: Array<Cafe>;
+
+    // comment wrote
+    @Column({ default: [], array: true })
+    @OneToMany(type => Comment, comment => comment.owner)
+    commentWrote!: Array<Comment>;
 
     // cafeLiked
     // @Column("simple-array", { default: []})
     @Column({ default: [], array: true })
-    likedCafeId!: number[];
-    @ManyToMany(type => Cafe, cafe => cafe.likedUsers)
-    @JoinColumn({ name: "likedCafeId"})
-    cafeLiked!: Array<Cafe>;
+    @OneToMany(type => Like, like => like.owner)
+    likes!: Array<Like>;
+    
 }

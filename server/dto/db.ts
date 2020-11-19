@@ -4,6 +4,7 @@ import dbConfig from "../configs/db/dbConfig";
 
 class db {
     private connection: Promise<Connection>;
+
     constructor(){
         this.connection = new Promise((resolve, reject) => {
             createConnection(dbConfig).then( res => {

@@ -17,11 +17,11 @@ class UserRepository implements BaseRepository {
                 }
             });
 
-            if(!userMaybe){
-                return null;
+            if(!!userMaybe){
+                return userMaybe;
             }
 
-            return userMaybe;
+            return null;
         })
     }
 
@@ -32,7 +32,6 @@ class UserRepository implements BaseRepository {
             }
         })
 
-        console.log("from repo: ", userMaybe);
         if(!!userMaybe){
             return userMaybe;
         }

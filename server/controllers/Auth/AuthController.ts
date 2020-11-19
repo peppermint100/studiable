@@ -1,5 +1,5 @@
 import { basicController } from '../basicController';
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import RegisterRequest from '../../types/Auth/RegisterRequest';
 import AuthService from '../../services/Auth/AuthService';
 import LoginRequest from '../../types/Auth/LoginRequest';
@@ -17,11 +17,12 @@ class AuthController implements basicController{
     }
 
     public init(){
-        this.controller.post("/signup", this.signup);
         this.controller.post("/login", this.login);
+        this.controller.post("/signup", this.signup);
     }
 
-    async signup(req: Request, res: Response){
+    // create method as arrow function to bind this automatically
+    signup = async (req: Request, res: Response) => {
         const registerRequest: RegisterRequest = req.body;
 
         await this.authService.signup(registerRequest)
@@ -34,19 +35,18 @@ class AuthController implements basicController{
         });
     }
 
-    async login(req: Request, res: Response){
+    login = async (req: Request, res: Response) => {
         const loginRequest: LoginRequest = req.body;
-        
         await this.authService.login(loginRequest)
         .then(resp => {
-            // send jwt as cookie data
-            // send succeed message
+            res.cookie('Authorization', resp).json({ message: "로그인에 성공했습니다."});
         }).catch((err: CustomException) => {
             if(err){
                 res.status(err.status).json({ message: err.message })
             }
         })
     }
+
 }
 
 export default AuthController;

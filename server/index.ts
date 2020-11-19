@@ -10,15 +10,19 @@ import AuthService from "./services/Auth/AuthService";
 import UserRepository from "./dto/User/UserRepository";
 import AuthRepository from "./dto/Auth/AuthRepository";
 import BcryptEncoder from "./utils/BcryptEncoder";
+import JwtService from './utils/JwtService';
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
-const bcryptEncoder = new BcryptEncoder(process.env.BCRYPT_SALT!);
+const jwtService = new JwtService(process.env.JWT_KEY || "secret", process.env.JWT_EXPIRE_DATE || "3600");
+const bcryptEncoder = new BcryptEncoder(process.env.BCRYPT_SALT || "10");
 const dbCore = new db();
 const userRepository = new UserRepository(dbCore);
 const authRepository = new AuthRepository(dbCore);
-const authService = new AuthService(authRepository, userRepository, bcryptEncoder);
+const authService = new AuthService(authRepository, userRepository, bcryptEncoder, jwtService);
 const authController = new AuthController(authService);
+
 
 const appConfig = {
    port: 5000,
@@ -28,7 +32,8 @@ const appConfig = {
    middlewares: [
        cors(corsConfig),
        express.json(),
-       express.urlencoded({ extended: false})
+       express.urlencoded({ extended: false}),
+       cookieParser()
    ],
    db: dbCore,
    envConfig: new EnvConfig()

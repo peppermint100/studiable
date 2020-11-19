@@ -30,8 +30,6 @@ class AuthController implements basicController{
                 res.status(406).json({ message: err.message })
             }
         });
-        
-
     }
 }
 

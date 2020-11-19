@@ -19,20 +19,14 @@ export class User extends BaseEntity{
     password!: string;
 
     // cafePosted
-    // to do some relation stuff added joinColumn but Cafe entity doesn't really make changes about User so I didn't add joinColumn on the other side
-    @Column({ default: []})
     @OneToMany(type => Cafe, cafe => cafe.writer)
     cafePosted!: Array<Cafe>;
 
     // comment wrote
-    @Column({ default: [], array: true })
     @OneToMany(type => Comment, comment => comment.owner)
     commentWrote!: Array<Comment>;
 
     // cafeLiked
-    // @Column("simple-array", { default: []})
-    @Column({ default: [], array: true })
     @OneToMany(type => Like, like => like.owner)
     likes!: Array<Like>;
-    
 }

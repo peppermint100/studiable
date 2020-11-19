@@ -1,7 +1,7 @@
 import { Like } from '../Like/Like';
 import { Comment } from './../Comment/Comment';
 import { User } from './../User/User';
-import { AfterLoad, Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { AfterLoad, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Feature from "../../types/Feature";
 
 @Entity()
@@ -16,7 +16,7 @@ export class Cafe{
     @Column({nullable: false})
     cafeContent!: string;
 
-    @Column({nullable: false})
+    @Column("simple-array", {nullable: false})
     cafeFeatures!: Array<Feature>;
 
     @Column({ nullable: true })
@@ -38,8 +38,6 @@ export class Cafe{
     @JoinColumn({ name: "writerId" })
     writer!: User;
 
-    // comment
-    @Column({ default: [], array: true })
     @OneToMany(type => Comment, comment => comment.cafeBelongsTo)
     comments!: Array<Comment>;
 
@@ -48,7 +46,6 @@ export class Cafe{
     imageLocation!: string;
 
     // likesUsers
-    @Column({ default: [], array: true })
     @OneToMany(type => Like, like => like.cafe)
     likes!: Array<Like>;
 

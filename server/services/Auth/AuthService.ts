@@ -17,14 +17,16 @@ class AuthService {
     async signup({ username, email, password, confirmPassword }: RegisterRequest){
 
         if(password !== confirmPassword){
-            return new Error("두 비밀번호가 서로 일치하지 않습니다.");
+            throw new Error("두 비밀번호가 서로 일치하지 않습니다.");
         }
 
-        const userMaybe = await this.userRepository.getUserByEmail(email);
+        const userMaybe = this.userRepository.getUserByEmail(email);
 
         if(!userMaybe){
-            return new Error("이미 존재하는 이메일입니다.");
+            throw new Error("이미 존재하는 이메일입니다.");
         }
+
+        // encrypt password
 
         const filteredRegisterRequest: FilteredRegisterRequest = {
             username,

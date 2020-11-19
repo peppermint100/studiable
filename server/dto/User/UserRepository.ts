@@ -1,5 +1,4 @@
 import { User } from './../../entities/User/User';
-import { Connection } from "typeorm";
 import BaseRepository from "../BaseRepository";
 import db from "../db";
 
@@ -11,7 +10,7 @@ class UserRepository implements BaseRepository {
     }
     
     async getUserById(userId: string){
-        this.connection.getConnecton().then( async conn => {
+        await this.connection.getConnecton().then( async conn => {
             const userMaybe = await User.findOne({
                 where: {
                     userId
@@ -19,30 +18,27 @@ class UserRepository implements BaseRepository {
             });
 
             if(!userMaybe){
-                throw new Error("존재하지 않는 유저입니다.");
+                return null;
             }
 
             return userMaybe;
         })
     }
 
-    getUserByEmail(email: string){
-            this.connection.getConnecton().then( async conn => {
-                const userMaybe = await User.findOne({
-                    where: {
-                        email
-                    }
-                });
+    async getUserByEmail(email: string){
+        const userMaybe = await User.findOne({
+            where: {
+                email
+            }
+        })
 
-                if(!userMaybe){
-                    return null;
-                }
-
-                return userMaybe;
-            })
-
-            return null;
+        console.log("from repo: ", userMaybe);
+        if(!!userMaybe){
+            return userMaybe;
         }
+
+        return null;
+    }
 }
 
 export default UserRepository;

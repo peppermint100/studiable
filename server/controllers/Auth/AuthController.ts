@@ -20,7 +20,7 @@ class AuthController implements basicController{
         this.controller.post("/login", this.login);
         this.controller.post("/signup", this.signUp);
         this.controller.post("/me", this.me);
-        this.controller.post("/getauth", this.getAuth);
+        this.controller.post("/getauth", this.requireAuth);
     }
 
     // create method as arrow function to bind this automatically
@@ -64,7 +64,7 @@ class AuthController implements basicController{
 
     }
 
-    getAuth = async (req: Request, res: Response, next: NextFunction) => {
+    requireAuth = async (req: Request, res: Response, next: NextFunction) => {
         const token = req.cookies.Authorization;
         
         await this.authService.getAuth(token)

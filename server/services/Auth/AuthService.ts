@@ -7,12 +7,14 @@ import RegisterRequest from "../../types/Auth/RegisterRequest";
 import BcryptEncoder from '../../utils/BcryptEncoder';
 import JwtService from "../../utils/JwtService";
 
+
 class AuthService {
 
     private authRepository: AuthRepository;
     private userRepository: UserRepository;
     private bcryptEncoder: BcryptEncoder;
     private jwtService: JwtService;
+    private static bearer: string = "Bearer ";
 
     constructor(
         authRepository: AuthRepository
@@ -67,11 +69,18 @@ class AuthService {
         }
 
         // create jwt
-        const bearer = "Bearer ";
-        const token = bearer.concat(this.jwtService.sign(email));
+
+        const username = userMaybeByEmail.username;
+        const token = AuthService.bearer.concat(this.jwtService.sign(email, username));
 
         // return jwt
         return token;
+    }
+
+    // valid jwt to persist authentication or do some serious work
+    getAuth = async (token: string) => {
+        const peeledToken = token.replace(AuthService.bearer, "");
+        return this.jwtService.verify(peeledToken);
     }
 
 }

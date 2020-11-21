@@ -9,9 +9,10 @@ class JwtService {
         this.expireDate = expireDate;
     }
     
-    sign(email: string){
+    sign(email: string, username: string){
         let token = jwt.sign({
             email,
+            username
         }, this.key, {expiresIn: parseInt(this.expireDate)})
 
         return token;
@@ -19,7 +20,8 @@ class JwtService {
 
     verify(token: string){
         const decoded = jwt.verify(token, this.key); 
-        console.log("verified content : ", decoded);
+
+        return decoded;
     }
 }
 

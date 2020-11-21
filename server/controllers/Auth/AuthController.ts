@@ -1,5 +1,5 @@
 import { basicController } from '../basicController';
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import RegisterRequest from '../../types/Auth/RegisterRequest';
 import AuthService from '../../services/Auth/AuthService';
 import LoginRequest from '../../types/Auth/LoginRequest';
@@ -18,11 +18,13 @@ class AuthController implements basicController{
 
     public init(){
         this.controller.post("/login", this.login);
-        this.controller.post("/signup", this.signup);
+        this.controller.post("/signup", this.signUp);
+        this.controller.post("/me", this.me);
+        this.controller.post("/getauth", this.getAuth);
     }
 
     // create method as arrow function to bind this automatically
-    signup = async (req: Request, res: Response) => {
+    signUp = async (req: Request, res: Response) => {
         const registerRequest: RegisterRequest = req.body;
 
         await this.authService.signup(registerRequest)
@@ -30,7 +32,7 @@ class AuthController implements basicController{
             res.json({ message: "회원가입에 성공했습니다."});
         }).catch((err:CustomException) => {
             if(err){
-                res.status(err.status).json({ message: err.message })
+                res.status(err.status).json({ message: err.message });
             }
         });
     }
@@ -42,11 +44,40 @@ class AuthController implements basicController{
             res.cookie('Authorization', resp).json({ message: "로그인에 성공했습니다."});
         }).catch((err: CustomException) => {
             if(err){
-                res.status(err.status).json({ message: err.message })
+                res.status(err.status).json({ message: err.message });
             }
         })
     }
 
+    me = async (req: Request, res: Response) => {
+            const token = req.cookies.Authorization;
+            
+            await this.authService.getAuth(token)
+            .then(resp => {
+                res.json(resp);
+            })
+            .catch((err: CustomException) => {
+                if(err){
+                    res.status(403).json({ message: "로그인이 필요합니다."});
+                }
+            });
+
+    }
+
+    getAuth = async (req: Request, res: Response, next: NextFunction) => {
+        const token = req.cookies.Authorization;
+        
+        await this.authService.getAuth(token)
+        .then(res => {
+            next(res);
+        })
+        .catch((err: CustomException) => {
+            if(err){
+                res.status(403).json({ message: "로그인이 필요합니다."});
+            }
+        });
+
+    }
 }
 
 export default AuthController;

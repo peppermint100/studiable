@@ -28,11 +28,12 @@ const appConfig = {
    port: 5000,
    routes: [
        authController
+       // private route
    ],
    middlewares: [
        cors(corsConfig),
        express.json(),
-       express.urlencoded({ extended: false}),
+       express.urlencoded({ extended: false }),
        cookieParser()
    ],
    db: dbCore,

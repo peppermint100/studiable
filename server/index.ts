@@ -23,12 +23,14 @@ const authRepository = new AuthRepository(dbCore);
 const authService = new AuthService(authRepository, userRepository, bcryptEncoder, jwtService);
 const authController = new AuthController(authService);
 
-
 const appConfig = {
    port: 5000,
    routes: [
        authController
        // private route
+   ],
+   privateRoute:[
+       
    ],
    middlewares: [
        cors(corsConfig),

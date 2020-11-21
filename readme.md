@@ -2,14 +2,20 @@
 ☕☕ Find and Share studiable coffeeshop. 
 
 ## Todo
-- [ ] env settings
-- [ ] entity 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
 
+### Client
+- [ ] env settings
+- [ ] axios request default settings 
+
+
+### Server
+- [x] env settings
+- [x] entity design
+- [ ] controller design 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
 
 ## Stack
 #### Front
@@ -32,7 +38,3 @@
 - AWS EC2
 - AWS RDS
 - AWS S3
-
-
-
-

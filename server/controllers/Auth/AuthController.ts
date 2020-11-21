@@ -26,6 +26,7 @@ class AuthController implements basicController{
     // create method as arrow function to bind this automatically
     signUp = async (req: Request, res: Response) => {
         const registerRequest: RegisterRequest = req.body;
+        console.log(req.body)
 
         await this.authService.signup(registerRequest)
         .then(resp => {

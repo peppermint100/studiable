@@ -1,9 +1,20 @@
-import { AuthActionsType, SIGN_UP_RECEIVE_DATA, SIGN_UP_REQUEST } from './../../actions/Auth/authActions';
+import { AuthActionsType, LOG_IN_RECEIVE_DATA, SIGN_UP_RECEIVE_DATA } from './../../actions/Auth/authActions';
 
-const initialState:any = {}
-export default (state: any = initialState, action:AuthActionsType) => {
+interface CurrentUser {
+    email: string;
+    username: string;
+}
+const initialState: CurrentUser | any = {}
+const authReducer = (state: CurrentUser | any = initialState, action:AuthActionsType) => {
     switch(action.type){
+        case LOG_IN_RECEIVE_DATA: 
+            const { payload : { email, username }} = action;
+            return { email, username };
+        case SIGN_UP_RECEIVE_DATA:
+            return action.payload;
         default:
             return state;
     }
 }
+
+export default authReducer;

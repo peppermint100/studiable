@@ -1,4 +1,4 @@
-import { SignUpReqeustType } from './../../actions/Auth/authActions';
+import { signUpReceiveData, SignUpReqeustType } from './../../actions/Auth/authActions';
 import { signup } from './../../../api/Auth/SignUp';
 import { call, put } from "redux-saga/effects";
 import { pushMessage } from '../../actions/Message/messageAction';
@@ -7,6 +7,7 @@ export function* _signUpRequest({ payload: { username, email, password, confirmP
     try{
         const res = yield call(signup, username, email, password, confirmPassword);
         yield put(pushMessage(res.data.message));
+        yield put(signUpReceiveData(res.status));
     }catch(err: any){
         yield put(pushMessage(err.message));
     }

@@ -4,6 +4,7 @@ import RegisterRequest from '../../types/Auth/RegisterRequest';
 import AuthService from '../../services/Auth/AuthService';
 import LoginRequest from '../../types/Auth/LoginRequest';
 import CustomException from '../../exceptions/CustomException';
+import LoginReceiveData from '../../types/Auth/LoginReceiveData';
 
 class AuthController implements basicController{
     public url = "/auth";
@@ -41,8 +42,8 @@ class AuthController implements basicController{
     login = async (req: Request, res: Response) => {
         const loginRequest: LoginRequest = req.body;
         await this.authService.login(loginRequest)
-        .then(resp => {
-            res.cookie('Authorization', resp).json({ message: "로그인에 성공했습니다."});
+        .then(({ token, username, email }: LoginReceiveData) => {
+            res.cookie('Authorization', token).json({ message: "로그인에 성공했습니다.", username, email});
         }).catch((err: CustomException) => {
             if(err){
                 res.status(err.status).json({ message: err.message });

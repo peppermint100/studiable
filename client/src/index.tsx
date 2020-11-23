@@ -11,6 +11,9 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(RootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(saga);
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
 ReactDOM.render(
   <React.StrictMode>

@@ -29,6 +29,7 @@ class AuthService {
     }
 
     async signup({ username, email, password, confirmPassword }: RegisterRequest){
+        if(!username || !email || !password || !confirmPassword) throw new CustomException("빈 칸을 전부 채워주세요.", 403);
 
         if(password !== confirmPassword){
             throw new CustomException("두 비밀번호가 서로 일치하지 않습니다.", 403);
@@ -74,7 +75,7 @@ class AuthService {
         const token = AuthService.bearer.concat(this.jwtService.sign(email, username));
 
         // return jwt
-        return token;
+        return { token, username, email };
     }
 
     // valid jwt to persist authentication or do some serious work

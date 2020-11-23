@@ -1,13 +1,16 @@
 import React from 'react';
 import { Formik } from "formik";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signUpRequest } from '../../redux/actions/Auth/authActions';
 import FormInput from '../StyleProperties/Form/FormInput';
 import FormButton from '../StyleProperties/Form/FormButton';
 import styled from 'styled-components';
+import { RootReducerType } from '../../redux/reducers/rootReducer';
 
 const SignUpForm = () => {
     const dispatch = useDispatch();
+    const message = useSelector((state: RootReducerType) => state.messageReducer);
+
     return (
         <div>
             <Formik initialValues={{ username: "", email: "", password: "", confirmPassword: "" }} onSubmit={(data, { setSubmitting }) => {
@@ -36,6 +39,10 @@ const SignUpForm = () => {
                         </div>
                         <br />
                         <FormButton type="submit" disabled={isSubmitting}>Sign Up</FormButton>
+                        <br />
+                        <MessageContainer>
+                            { message ? message : null}
+                        </MessageContainer>
                     </form>
                 )
                 }
@@ -54,6 +61,11 @@ const Label = styled.label`
 
 const FormSection = styled.section`
     margin-bottom: 5px;
+`
+
+const MessageContainer = styled.p`
+    color: #e74c3c;
+    font-weight:600;
 `
 
 export default SignUpForm;

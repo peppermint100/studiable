@@ -14,6 +14,10 @@ const Button = styled.button`
     background-color: #773300;
     text-align: center;
     font-size: 24px;
+    cursor: pointer;
+    &:hover{
+        opacity: .8;
+    }
 `
 export default FormButton;
 

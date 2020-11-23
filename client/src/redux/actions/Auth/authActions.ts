@@ -10,10 +10,6 @@ export const signUpRequest = (registerRequest: RegisterRequest) => ({
 })
 
 // triggered by saga
-export const signUpReceiveData = (data: any) => ({
-    type: SIGN_UP_RECEIVE_DATA,
-    data
-})
 
-export type AuthActionsType = ReturnType<typeof signUpReceiveData>
+export type AuthActionsType = SignUpReqeustType 
 export type SignUpReqeustType = ReturnType<typeof signUpRequest>

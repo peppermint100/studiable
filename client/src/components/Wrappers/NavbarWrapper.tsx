@@ -21,6 +21,7 @@ const Container = styled.div`
     background-color: #F2EBE6;
 `
 const RestContainer = styled.div`
+    min-width: 100vw;
     min-height: calc(100vh - 50px); // white space need between any +/-
 `
 

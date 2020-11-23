@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik } from "formik";
 import { useDispatch, useSelector } from 'react-redux';
-import { signUpRequest } from '../../redux/actions/Auth/authActions';
+import { loginRequest } from '../../redux/actions/Auth/authActions';
 import FormInput from '../StyleProperties/Form/FormInput';
 import FormButton from '../StyleProperties/Form/FormButton';
 import styled from 'styled-components';
@@ -13,10 +13,10 @@ const LoginForm = () => {
 
     return (
         <div>
-            <Formik initialValues={{ username: "", email: "", password: "", confirmPassword: "" }} onSubmit={(data, { setSubmitting }) => {
+            <Formik initialValues={{ email: "", password: "" }} onSubmit={(data, { setSubmitting }) => {
                 setSubmitting(true)
                 // api calls
-                dispatch(signUpRequest(data))
+                dispatch(loginRequest(data))
                 setSubmitting(false)
             }}>
                 {

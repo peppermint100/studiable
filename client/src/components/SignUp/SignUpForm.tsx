@@ -16,7 +16,7 @@ const SignUpForm = () => {
 
     useEffect(() => {
         if(registerSuccessStatus === 200){
-            history.push("/login", { state: message });
+            history.push("/login");
         }
     }, [registerSuccessStatus])
 

@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import getAuth from '../../api/Auth/getAuth';
+import { useCookies } from "react-cookie";
+import { useDispatch, useSelector } from 'react-redux';
+import { meRequest } from '../../redux/actions/Auth/authActions';
+import { RootReducerType } from '../../redux/reducers/rootReducer';
 
 const Navbar = () => {
-
     const history = useHistory();
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state: RootReducerType) => state.authReducers);
     // temp state
-    const [hasAuth, setHasAuth] = useState<boolean>(false);
+
+    const [cookies, setCookies] = useCookies();
+
+    useEffect(() => {
+        if(cookies){
+            const token = cookies.Authorization;
+            dispatch(meRequest(token));
+        }
+    })
 
     const toLoginPage = () => {
         history.push("/login");

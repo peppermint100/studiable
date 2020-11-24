@@ -6,7 +6,7 @@ import { pushMessage } from '../../actions/Message/messageAction';
 export function* _loginRequest({ payload: { email, password } }: LoginRequestType) {
     try{
         const res = yield call(login, email, password);
-        yield put(pushMessage(res.data.message));
+        yield put(pushMessage(res.data?.message));
         yield put(loginReceiveData(res.data));
     }catch(err: any){
         yield put(pushMessage(err.message));

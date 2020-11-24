@@ -6,7 +6,7 @@ import { pushMessage } from '../../actions/Message/messageAction';
 export function* _signUpRequest({ payload: { username, email, password, confirmPassword} }: SignUpReqeustType) {
     try{
         const res = yield call(signup, username, email, password, confirmPassword);
-        yield put(pushMessage(res.data.message));
+        yield put(pushMessage(res.data?.message));
         yield put(signUpReceiveData(res.status));
     }catch(err: any){
         yield put(pushMessage(err.message));

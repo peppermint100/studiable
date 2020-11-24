@@ -6,6 +6,7 @@ export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST" as const;
 export const SIGN_UP_RECEIVE_DATA = "SIGN_UP_RECEIVE_DATA" as const;
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST" as const;
 export const LOG_IN_RECEIVE_DATA = "LOG_IN_RECEIVE_DATA" as const;
+export const ME_REQUEST = "ME_REQUEST" as const;
 
 // triggered by application
 export const signUpRequest = (registerRequest: RegisterRequest) => ({
@@ -29,9 +30,15 @@ export const loginReceiveData = (response: LoginReceiveData) => ({
     payload: response
 })
 
+export const meRequest = (token: string) => ({
+    type: ME_REQUEST,
+    payload: token
+})
+
 export type signUpReceiveDataType = ReturnType<typeof signUpReceiveData>
 export type SignUpReqeustType = ReturnType<typeof signUpRequest>
 export type LoginRequestType = ReturnType<typeof loginRequest>
 export type LoginReceiveDataType = ReturnType<typeof loginReceiveData>
+export type MeRequestType = ReturnType<typeof meRequest>
 
-export type AuthActionsType = SignUpReqeustType | signUpReceiveDataType | LoginRequestType | LoginReceiveDataType; 
+export type AuthActionsType = SignUpReqeustType | signUpReceiveDataType | LoginRequestType | LoginReceiveDataType | MeRequestType; 

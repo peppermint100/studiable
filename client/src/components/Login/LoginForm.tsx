@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from "formik";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../redux/actions/Auth/authActions';
@@ -6,10 +6,19 @@ import FormInput from '../StyleProperties/Form/FormInput';
 import FormButton from '../StyleProperties/Form/FormButton';
 import styled from 'styled-components';
 import { RootReducerType } from '../../redux/reducers/rootReducer';
+import { useHistory } from 'react-router-dom';
 
 const LoginForm = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const message = useSelector((state: RootReducerType) => state.messageReducer);
+    const currentUser = useSelector((state: RootReducerType) => state.authReducers);
+
+    useEffect(() => {
+        if(currentUser.email && currentUser.username){
+            history.push("/");
+        }
+    })
 
     return (
         <div>

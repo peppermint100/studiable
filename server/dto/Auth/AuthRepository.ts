@@ -12,7 +12,7 @@ class AuthRepository implements BaseRepository {
     }
 
     signup(filterRegisterRequest: FilteredRegisterRequest){
-        this.connection.getConnecton().then( async () => {
+        this.connection.getConnection().then( async () => {
             const createdUser = await User.create({
                 ...filterRegisterRequest
             }).save();

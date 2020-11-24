@@ -12,12 +12,18 @@ import AuthRepository from "./dto/Auth/AuthRepository";
 import BcryptEncoder from "./utils/BcryptEncoder";
 import JwtService from './utils/JwtService';
 import cookieParser from "cookie-parser";
+import CafeController from './controllers/Cafe/CafeController';
+import CafeService from './services/Cafe/CafeService';
+import CafeRepository from './dto/Cafe/CafeRepository';
 
 dotenv.config();
+const dbCore = new db();
 
+const cafeRepository = new CafeRepository(dbCore);
+const cafeService = new CafeService(cafeRepository);
+const cafeController = new CafeController(cafeService);
 const jwtService = new JwtService(process.env.JWT_KEY || "secret", process.env.JWT_EXPIRE_DATE || "3600");
 const bcryptEncoder = new BcryptEncoder(process.env.BCRYPT_SALT || "10");
-const dbCore = new db();
 const userRepository = new UserRepository(dbCore);
 const authRepository = new AuthRepository(dbCore);
 const authService = new AuthService(authRepository, userRepository, bcryptEncoder, jwtService);
@@ -26,11 +32,9 @@ const authController = new AuthController(authService);
 const appConfig = {
    port: 5000,
    routes: [
-       authController
+       authController,
        // private route
-   ],
-   privateRoute:[
-       
+       cafeController
    ],
    middlewares: [
        cors(corsConfig),

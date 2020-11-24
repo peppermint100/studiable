@@ -28,7 +28,7 @@ class db {
         })
     }
 
-    public getConnecton(){
+    public getConnection(){
         return this.connection;
     }
 

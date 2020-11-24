@@ -1,11 +1,11 @@
 import { Like } from '../Like/Like';
 import { Comment } from './../Comment/Comment';
 import { User } from './../User/User';
-import { AfterLoad, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { AfterLoad, BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Feature from "../../types/Feature";
 
 @Entity()
-export class Cafe{
+export class Cafe extends BaseEntity{
 
     @PrimaryGeneratedColumn("increment")
     cafeId!: number;

@@ -10,7 +10,7 @@ class UserRepository implements BaseRepository {
     }
     
     async getUserById(userId: string){
-        await this.connection.getConnecton().then( async conn => {
+        await this.connection.getConnection().then( async conn => {
             const userMaybe = await User.findOne({
                 where: {
                     userId

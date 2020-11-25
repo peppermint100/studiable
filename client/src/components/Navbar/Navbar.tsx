@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import getAuth from '../../api/Auth/getAuth';
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from 'react-redux';
 import { meRequest } from '../../redux/actions/Auth/authActions';
@@ -11,16 +10,15 @@ const Navbar = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootReducerType) => state.authReducers);
-    // temp state
 
     const [cookies, setCookies] = useCookies();
 
     useEffect(() => {
-        if(cookies){
+        if(cookies.Authorization){
             const token = cookies.Authorization;
             dispatch(meRequest(token));
         }
-    })
+    }, [])
 
     const toLoginPage = () => {
         history.push("/login");
@@ -33,9 +31,23 @@ const Navbar = () => {
     return (
         <NavBarContainer>
             <NavInnerContainer>
-                <LoginButton onClick={toLoginPage}>LOGIN</LoginButton> 
-                <LightGrayBar />
-                <SignUpButton onClick={toSignUpPage}>SIGN UP</SignUpButton>
+                {
+                    currentUser.email && currentUser.username ?
+                    (
+                        <>
+                            <p>안녕하세요 {currentUser.username}님</p>
+                        </>
+                    )
+                    :
+                    (
+                        <>
+                            <LoginButton onClick={toLoginPage}>LOGIN</LoginButton> 
+                            <LightGrayBar />
+                            <SignUpButton onClick={toSignUpPage}>SIGN UP</SignUpButton>
+                        </>
+                    )
+                }
+                
             </NavInnerContainer>
         </NavBarContainer>
     )
@@ -64,7 +76,7 @@ const LoginButton = styled.button`
     font-weight: 600;
     font-size: 16px;
     line-height: 30px;
-cursor: pointer;
+    cursor: pointer;
 `;
 const SignUpButton = styled.button`
     font-weight: 600;

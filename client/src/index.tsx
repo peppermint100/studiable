@@ -5,7 +5,6 @@ import App from './App';
 // cookie
 import { CookiesProvider } from "react-cookie";
 
-
 // redux
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -23,11 +22,11 @@ store.subscribe(() => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <CookiesProvider>
       <Provider store={store}>
-        <App />
+        <CookiesProvider>
+            <App />
+        </CookiesProvider>
       </Provider>
-    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

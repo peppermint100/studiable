@@ -21,13 +21,13 @@ const dbCore = new db();
 
 const cafeRepository = new CafeRepository(dbCore);
 const cafeService = new CafeService(cafeRepository);
-const cafeController = new CafeController(cafeService);
 const jwtService = new JwtService(process.env.JWT_KEY || "secret", process.env.JWT_EXPIRE_DATE || "3600");
 const bcryptEncoder = new BcryptEncoder(process.env.BCRYPT_SALT || "10");
 const userRepository = new UserRepository(dbCore);
 const authRepository = new AuthRepository(dbCore);
 const authService = new AuthService(authRepository, userRepository, bcryptEncoder, jwtService);
 const authController = new AuthController(authService);
+const cafeController = new CafeController(cafeService, authController);
 
 const appConfig = {
    port: 5000,

@@ -16,17 +16,21 @@ export class Cafe extends BaseEntity{
     @Column({nullable: false})
     cafeContent!: string;
 
-    @Column("simple-array", {nullable: false})
+    @Column("simple-array", {nullable: true })
     cafeFeatures!: Array<Feature>;
 
     @Column({ nullable: true })
     cafeScore!: number;
 
-    @Column({ nullable: true})
+    @Column({ nullable: true })
     americanoPrice!: number;
 
     @Column({ nullable: true })
     cafeLocation!: string; // requires types for google map location 
+
+    // image location
+    @Column({ nullable: true })
+    imageLocation!: string;
 
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
     createdAt!: Date;
@@ -41,11 +45,7 @@ export class Cafe extends BaseEntity{
     @OneToMany(type => Comment, comment => comment.cafeBelongsTo)
     comments!: Array<Comment>;
 
-    // image location
-    @Column({ nullable: true })
-    imageLocation!: string;
-
-    // likesUsers
+     // likesUsers
     @OneToMany(type => Like, like => like.cafe)
     likes!: Array<Like>;
 

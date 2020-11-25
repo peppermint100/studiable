@@ -72,10 +72,11 @@ class AuthService {
         // create jwt
 
         const username = userMaybeByEmail.username;
-        const token = AuthService.bearer.concat(this.jwtService.sign(email, username));
+        const userId = userMaybeByEmail.userId;
+        const token = AuthService.bearer.concat(this.jwtService.sign(email, username, userId));
 
         // return jwt
-        return { token, username, email };
+        return { token, username, email, userId };
     }
 
     // valid jwt to persist authentication or do some serious work

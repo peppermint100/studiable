@@ -7,7 +7,7 @@ import { _meRequest } from "./sagaFunctions/_meRequest";
 import { _signUpRequest } from "./sagaFunctions/_signUpRequest";
 
 export default function* saga() {
-    yield takeLatest(SIGN_UP_REQUEST as unknown as TakeableChannel<unknown>, _signUpRequest);
     yield takeLatest(LOG_IN_REQUEST as unknown as TakeableChannel<unknown>, _loginRequest);
+    yield takeLatest(SIGN_UP_REQUEST as unknown as TakeableChannel<unknown>, _signUpRequest);
     yield takeLatest(ME_REQUEST as unknown as TakeableChannel<unknown>, _meRequest);
 }

@@ -41,8 +41,8 @@ class AuthController implements basicController{
     login = async (req: Request, res: Response) => {
         const loginRequest: LoginRequest = req.body;
         await this.authService.login(loginRequest)
-        .then(({ token, username, email }: LoginReceiveData) => {
-            res.cookie('Authorization', token).json({ message: "로그인에 성공했습니다.", username, email});
+        .then(({ token, username, email, userId }: LoginReceiveData) => {
+            res.cookie('Authorization', token).json({ message: "로그인에 성공했습니다.", username, email, userId});
         }).catch((err: CustomException) => {
             if(err){
                 res.status(err.status).json({ message: err.message });
@@ -69,7 +69,9 @@ class AuthController implements basicController{
         
         await this.authService.getAuth(token)
         .then(res => {
-            next(res);
+            const { username, userId, email }: any = res;
+            req.body.user = { username, userId, email };
+            next();
         })
         .catch((err: CustomException) => {
             if(err){

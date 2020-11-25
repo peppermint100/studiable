@@ -9,10 +9,11 @@ class JwtService {
         this.expireDate = expireDate;
     }
     
-    sign(email: string, username: string){
+    sign(email: string, username: string, userId: string){
         let token = jwt.sign({
             email,
-            username
+            username,
+            userId
         }, this.key, {expiresIn: parseInt(this.expireDate)})
 
         return token;

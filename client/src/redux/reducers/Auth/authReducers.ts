@@ -8,8 +8,8 @@ const initialState: CurrentUser | any = {}
 const authReducer = (state: CurrentUser | any = initialState, action:AuthActionsType) => {
     switch(action.type){
         case LOG_IN_RECEIVE_DATA: 
-            const { payload : { email, username }} = action;
-            return { email, username };
+            const { payload : { email, username, userId }} = action;
+            return { email, username, userId };
         case SIGN_UP_RECEIVE_DATA:
             return action.payload;
         default:

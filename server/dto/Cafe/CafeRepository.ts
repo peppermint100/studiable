@@ -1,5 +1,6 @@
 import { Cafe } from "../../entities/Cafe/Cafe";
 import CafeCreateRequest from "../../types/Cafe/CafeCreateRequest";
+import CafeUpdateRequest from "../../types/Cafe/CafeUpdateRequest";
 import BaseRepository from "../BaseRepository";
 import db from "../db";
 
@@ -37,7 +38,19 @@ class CafeRepository implements BaseRepository {
         })
     }
 
-    updateCafeByCafeId = async (cafeId: number, userId: string, cafeUpdateRequest: CafeCreateRequest) => {
+    getAllCafeByUserId = async (userId: string) => {
+        return this.connection.getConnection().then( async () => {
+            const cafeListMaybe = await Cafe.find({
+                where : {
+                    writerId: userId
+                }
+            })
+
+            return cafeListMaybe;
+        })
+    }
+
+    updateCafeByCafeId = async (cafeId: number, userId: string, cafeUpdateRequest: CafeUpdateRequest) => {
         return this.connection.getConnection().then( async () => {
             const updatedCafe = await Cafe.update({ cafeId }, { ...cafeUpdateRequest, writerId: userId});
             if(!updatedCafe){

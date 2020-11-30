@@ -2,6 +2,7 @@ import CafeRepository from "../../dto/Cafe/CafeRepository";
 import { Cafe } from "../../entities/Cafe/Cafe";
 import CustomException from "../../exceptions/CustomException";
 import CafeCreateRequest from "../../types/Cafe/CafeCreateRequest";
+import CafeUpdateRequest from "../../types/Cafe/CafeUpdateRequest";
 
 class CafeService {
 
@@ -29,13 +30,24 @@ class CafeService {
         
         const cafeFound = await this.cafeRepository.getCafeByCafeId(cafeId);
 
+        if(!cafeFound) throw new CustomException("존재하지 않는 카페입니다.", 404);
+
         return cafeFound;
     }
 
-    updateCafeByCafeId = async (cafeId: number, cafeUpdateRequest: CafeCreateRequest) => {
-        const { user : { userId }} = cafeUpdateRequest;
+    getAllCafeByUserId = async (userId: string) => {
+        if(!userId) throw new CustomException("잘못된 접근입니다.", 403);
+        
+        const cafeListFound = await this.cafeRepository.getAllCafeByUserId(userId);
+        if(!cafeListFound) throw new CustomException("카페가 존재하지 않습니다.", 404);
 
-        if(!cafeId || !cafeUpdateRequest) throw new CustomException("잘못된 접근입니다.", 403);
+        return cafeListFound;
+    }
+
+    updateCafeByCafeId = async (cafeId: number, cafeUpdateRequest: CafeUpdateRequest) => {
+        const userId = cafeUpdateRequest.user?.userId;
+
+        if(!cafeId || !cafeUpdateRequest || !userId) throw new CustomException("잘못된 접근입니다.", 403);
 
         const cafeFound = await this.cafeRepository.getCafeByCafeId(cafeId);
         if(!cafeFound) throw new CustomException("카페가 존재하지 않습니다.", 403);
@@ -43,7 +55,7 @@ class CafeService {
 
         if(cafeFound.writerId !== userId) throw new CustomException("다른 사람의 글은 수정할 수 없습니다.", 403);
 
-        const filteredCafeUpdateRequest: {[key: string]: any} = new Object(); // keyof 
+        const filteredCafeUpdateRequest: {[key: string] : any} = new Object(); // keyof 
         const entries = Object.entries(cafeUpdateRequest);
 
         for(let entry of entries){
@@ -52,7 +64,7 @@ class CafeService {
         }
 
         try{
-            const updatedCafe = await this.cafeRepository.updateCafeByCafeId(cafeId, userId, filteredCafeUpdateRequest as CafeCreateRequest);
+            const updatedCafe = await this.cafeRepository.updateCafeByCafeId(cafeId, userId, filteredCafeUpdateRequest as CafeUpdateRequest);
             return updatedCafe; 
         }catch(err){
             if(err){

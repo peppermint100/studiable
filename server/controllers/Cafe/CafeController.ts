@@ -5,6 +5,7 @@ import CafeService from '../../services/Cafe/CafeService';
 import CafeCreateRequest from '../../types/Cafe/CafeCreateRequest';
 import AuthController from '../Auth/AuthController';
 import { Cafe } from '../../entities/Cafe/Cafe';
+import CafeUpdateRequest from '../../types/Cafe/CafeUpdateRequest';
 
 class CafeController implements basicController{
     public url = "/cafe";
@@ -22,6 +23,7 @@ class CafeController implements basicController{
         this.controller.get("/", this.getAllCafe);
         this.controller.post("/create", this.authController.requireAuth ,this.createCafe);
         this.controller.get("/:cafeId", this.authController.requireAuth ,this.getCafeByCafeId)
+        this.controller.post("/:userId", this.authController.requireAuth ,this.getAllCafeByUserId)
         this.controller.put("/update/:cafeId", this.authController.requireAuth ,this.updateCafeByCafeId);
         this.controller.delete("/delete/:cafeId", this.authController.requireAuth, this.deleteCafeByCafeId);
     }
@@ -41,6 +43,21 @@ class CafeController implements basicController{
             if(err) res.status(err.status).json({ message: err.message});
         })
     }
+
+
+    getAllCafeByUserId = async (req: Request, res: Response) => {
+        const { userId } = req.params;
+        
+        await this.cafeService.getAllCafeByUserId(userId)
+        .then((resp: Array<Cafe>) => {
+            res.json({ cafe: resp});
+        }) 
+        .catch((err:CustomException) => {
+            if(err){
+                res.status(err.status).json({ message: err.message });
+            }
+        })
+    }
     
     // read
     getCafeByCafeId = async (req: Request, res: Response) => {
@@ -58,10 +75,10 @@ class CafeController implements basicController{
     // update
     updateCafeByCafeId = async (req: Request, res: Response) => {
         const { cafeId } = req.params;
-        const cafeUpdateRequest: CafeCreateRequest = req.body;
+        const cafeUpdateRequest: CafeUpdateRequest = req.body;
 
         await this.cafeService.updateCafeByCafeId(parseInt(cafeId), cafeUpdateRequest)
-        .then((cafe: any) => {
+        .then(() => {
             res.json({ message: "성공적으로 카페를 업로드했습니다."});
         })
         .catch((err: CustomException) => {

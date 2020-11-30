@@ -4,6 +4,7 @@ import CustomException from '../../exceptions/CustomException';
 import CafeService from '../../services/Cafe/CafeService';
 import CafeCreateRequest from '../../types/Cafe/CafeCreateRequest';
 import AuthController from '../Auth/AuthController';
+import { Cafe } from '../../entities/Cafe/Cafe';
 
 class CafeController implements basicController{
     public url = "/cafe";
@@ -18,23 +19,66 @@ class CafeController implements basicController{
     }
 
     public init(){
-        this.controller.get("/getallcafe", this.getAllCafe);
-        this.controller.post("/createcafe", this.authController.requireAuth ,this.createCafe);
+        this.controller.get("/", this.getAllCafe);
+        this.controller.post("/create", this.authController.requireAuth ,this.createCafe);
+        this.controller.get("/:cafeId", this.authController.requireAuth ,this.getCafeByCafeId)
+        this.controller.put("/update/:cafeId", this.authController.requireAuth ,this.updateCafeByCafeId);
+        this.controller.delete("/delete/:cafeId", this.authController.requireAuth, this.deleteCafeByCafeId);
     }
 
     getAllCafe = async (req: Request, res:Response) => {
        const cafe = await this.cafeService.getAllCafe(); 
-       return res.json({message: "hello", cafe});
+       return res.json({cafe});
     }
 
     createCafe = async (req: Request, res: Response) => {
         const cafeCreateRequest: CafeCreateRequest = req.body;
-        console.log("controller request: ", cafeCreateRequest);
         await this.cafeService.createCafe(cafeCreateRequest)
-        .then(() => {
+        .then((cafe: Cafe | void) => {
+            res.json({ message: "성공적으로 카페를 업로드했습니다.", cafe});
+        })
+        .catch((err: CustomException) => {
+            if(err) res.status(err.status).json({ message: err.message});
+        })
+    }
+    
+    // read
+    getCafeByCafeId = async (req: Request, res: Response) => {
+        const { cafeId } = req.params;
+        
+        await this.cafeService.getCafeByCafeId(parseInt(cafeId))
+        .then((cafe: Cafe | void) => {
+            res.json({ message: "카페 정보를 성공적으로 불러왔습니다.", cafe});
+        })
+        .catch((err: CustomException) => {
+            if(err) res.status(err.status).json({ message: err.message});
+        })
+    }
+
+    // update
+    updateCafeByCafeId = async (req: Request, res: Response) => {
+        const { cafeId } = req.params;
+        const cafeUpdateRequest: CafeCreateRequest = req.body;
+
+        await this.cafeService.updateCafeByCafeId(parseInt(cafeId), cafeUpdateRequest)
+        .then((cafe: any) => {
             res.json({ message: "성공적으로 카페를 업로드했습니다."});
         })
         .catch((err: CustomException) => {
+            if(err) res.status(err.status).json({ message: err.message});
+        })
+    }
+
+    // delete
+    deleteCafeByCafeId = async (req: Request, res: Response) => {
+        const { cafeId } = req.params;
+        const { user : { userId }} = req.body;
+
+        await this.cafeService.deleteCafeByCafeId(parseInt(cafeId), userId)
+        .then(() => {
+            res.json({ message: "성공적으로 카페를 삭제했습니다."});
+        })
+        .catch((err:CustomException) => {
             if(err) res.status(err.status).json({ message: err.message});
         })
     }

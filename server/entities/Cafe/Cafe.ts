@@ -16,7 +16,7 @@ export class Cafe extends BaseEntity{
     @Column({nullable: false})
     cafeContent!: string;
 
-    @Column("simple-array", {nullable: true })
+    @Column("simple-array", {nullable: true})
     cafeFeatures!: Array<Feature>;
 
     @Column({ nullable: true })
@@ -52,14 +52,18 @@ export class Cafe extends BaseEntity{
     // likescount
     @AfterLoad()
     countLikes(): number {
-        return this.likes.length;
+        if(this.likes){
+            return this.likes.length;
+        }else{
+            return 0;
+        }
     }
 
     @AfterLoad()
-    async hasUserPushedLike(user: User): Promise<boolean> {
+    async hasUserPushedLike(): Promise<boolean> {
         const likeMaybe: Like | undefined = await Like.findOne({
             where : {
-                userId: user.userId,
+                userId: this.writerId,
                 cafeId: this.cafeId
             }
         }) 

@@ -1,19 +1,22 @@
 import { Cafe } from './../Cafe/Cafe';
 import { User } from './../User/User';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne,  PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Comment{
+export class Comment extends BaseEntity{
+    
+    @PrimaryGeneratedColumn("uuid")
+    commentId!: string;
 
     // cafe belongs to
-    @PrimaryColumn()
+    @Column()
     cafeId!: number;
     @ManyToOne(type => Cafe, cafe => cafe.comments)
     @JoinColumn({ name: "cafeId"})
     cafeBelongsTo!: Cafe;
     
     // comment owner 
-    @PrimaryColumn()
+    @Column()
     ownerId!: string;
     @ManyToOne(type => User, user => user.commentWrote)
     @JoinColumn({ name:"ownerId" })

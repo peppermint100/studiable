@@ -15,26 +15,32 @@ import cookieParser from "cookie-parser";
 import CafeController from './controllers/Cafe/CafeController';
 import CafeService from './services/Cafe/CafeService';
 import CafeRepository from './dto/Cafe/CafeRepository';
+import CommentController from './controllers/Comment/CommentController';
+import CommentService from './services/Comment/CommentService';
+import CommentRepository from './dto/Comment/CommentRepository';
 
 dotenv.config();
 const dbCore = new db();
 
 const cafeRepository = new CafeRepository(dbCore);
+const commentRepository = new CommentRepository(dbCore);
+const userRepository = new UserRepository(dbCore);
+const commentService = new CommentService(commentRepository, userRepository, cafeRepository);
 const cafeService = new CafeService(cafeRepository);
 const jwtService = new JwtService(process.env.JWT_KEY || "secret", process.env.JWT_EXPIRE_DATE || "3600");
 const bcryptEncoder = new BcryptEncoder(process.env.BCRYPT_SALT || "10");
-const userRepository = new UserRepository(dbCore);
 const authRepository = new AuthRepository(dbCore);
 const authService = new AuthService(authRepository, userRepository, bcryptEncoder, jwtService);
 const authController = new AuthController(authService);
 const cafeController = new CafeController(cafeService, authController);
+const commentController = new CommentController(commentService, authController);
 
 const appConfig = {
    port: 5000,
    routes: [
        authController,
-       // private route
-       cafeController
+       cafeController,
+       commentController
    ],
    middlewares: [
        cors(corsConfig),

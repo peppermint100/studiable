@@ -1,5 +1,4 @@
 import CafeRepository from "../../dto/Cafe/CafeRepository";
-import { Cafe } from "../../entities/Cafe/Cafe";
 import CustomException from "../../exceptions/CustomException";
 import CafeCreateRequest from "../../types/Cafe/CafeCreateRequest";
 import CafeUpdateRequest from "../../types/Cafe/CafeUpdateRequest";

@@ -29,7 +29,7 @@ class AuthController implements basicController{
         const registerRequest: RegisterRequest = req.body;
 
         await this.authService.signup(registerRequest)
-        .then(resp => {
+        .then(() => {
             res.json({ message: "회원가입에 성공했습니다."});
         }).catch((err:CustomException) => {
             if(err){

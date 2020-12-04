@@ -42,11 +42,11 @@ export class Cafe extends BaseEntity{
     @JoinColumn({ name: "writerId" })
     writer!: User;
 
-    @OneToMany(type => Comment, comment => comment.cafeBelongsTo)
+    @OneToMany(type => Comment, comment => comment.cafeBelongsTo, { cascade: true })
     comments!: Array<Comment>;
 
      // likesUsers
-    @OneToMany(type => Like, like => like.cafe)
+    @OneToMany(type => Like, like => like.cafe, { cascade : true })
     likes!: Array<Like>;
 
     // likescount

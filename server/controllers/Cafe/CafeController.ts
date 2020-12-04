@@ -30,6 +30,7 @@ class CafeController implements basicController{
 
     getAllCafe = async (req: Request, res:Response) => {
        const cafe = await this.cafeService.getAllCafe(); 
+
        return res.json({cafe});
     }
 

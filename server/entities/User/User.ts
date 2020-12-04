@@ -19,14 +19,14 @@ export class User extends BaseEntity{
     password!: string;
 
     // cafePosted
-    @OneToMany(type => Cafe, cafe => cafe.writer)
+    @OneToMany(type => Cafe, cafe => cafe.writer, { cascade: true })
     cafePosted!: Array<Cafe>;
 
     // comment wrote
-    @OneToMany(type => Comment, comment => comment.owner)
+    @OneToMany(type => Comment, comment => comment.owner, { cascade : true })
     commentWrote!: Array<Comment>;
 
     // cafeLiked
-    @OneToMany(type => Like, like => like.owner)
+    @OneToMany(type => Like, like => like.owner, { cascade: true })
     likes!: Array<Like>;
 }

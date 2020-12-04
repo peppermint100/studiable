@@ -3,20 +3,6 @@
 
 ## Todo
 
-### Client
-- [ ] env settings
-- [ ] axios request default settings 
-
-
-### Server
-- [x] env settings
-- [x] entity design
-- [ ] controller design 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-
 ## Stack
 #### Front
 - Typescript

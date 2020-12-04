@@ -1,6 +1,6 @@
 import { Comment } from './../Comment/Comment';
 import { Cafe } from './../Cafe/Cafe';
-import { BaseEntity, Column, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Like } from '../Like/Like';
 
 @Entity()

@@ -32,7 +32,7 @@ const Content = styled.div`
 `;
 
 const FormBreaker = styled.div`
-width: fit-content;
+    width: fit-content;
     color: #AAA6A6;
     font-size: 18px;
     display: flex;

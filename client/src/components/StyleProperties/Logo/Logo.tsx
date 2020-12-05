@@ -13,9 +13,9 @@ const Logo = () => {
     }
 
     return (
-        <img onClick={() => {
-            history.push("/");
-        }} style={logoStyle} src={LogoImg} alt="logo" />
+            <img onClick={() => {
+                history.push("/");
+            }} style={logoStyle} src={LogoImg} alt="logo" />
     )
 }
 

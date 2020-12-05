@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Footer from '../Footer/Footer'
 import Navbar from '../Navbar/Navbar'
+import NavbarWithLogo from '../Navbar/NavbarWithLogo'
 
 interface Props {
     children: any;
@@ -10,7 +11,7 @@ interface Props {
 const NavbarFooterWrapper: React.FC<Props> = ({ children }) => {
     return (
         <Container>
-           <Navbar />
+           <NavbarWithLogo />
            <RestContainer>
                 { children } 
            </RestContainer>
@@ -22,11 +23,11 @@ const NavbarFooterWrapper: React.FC<Props> = ({ children }) => {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-`
+    `
 
 const RestContainer = styled.div`
     min-width: 100vw;
-    min-height: calc(100vh - 50px); // white space need between any +/-
+    min-height: calc(100vh - 300px); // white space need between any +/-
 `
 
 

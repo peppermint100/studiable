@@ -21,7 +21,7 @@ const SignUpForm = () => {
     }, [registerSuccessStatus])
 
     return (
-        <div>
+        <div style={{ width: "fit-content"}}>
             <Formik initialValues={{ username: "", email: "", password: "", confirmPassword: "" }} onSubmit={(data, { setSubmitting }) => {
                 setSubmitting(true)
                 // api calls

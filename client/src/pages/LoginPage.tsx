@@ -7,18 +7,18 @@ import NavbarWrapper from '../components/Wrappers/NavbarWrapper'
 const LoginPage = () => {
     return (
         <NavbarWrapper>
-            <Center>
+            <InnerContainer>
                 <Content>
                     <Logo />
                     <FormBreaker>LOG IN WITH E-MAIL</FormBreaker>
                     <LoginForm />
                 </Content>
-            </Center>
+            </InnerContainer>
         </NavbarWrapper>
     )
 }
 
-const Center = styled.div`
+const InnerContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +26,16 @@ const Center = styled.div`
 `;
 
 const Content = styled.div`
+    width: 600px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 `;
 
 const FormBreaker = styled.div`
+    width: fit-content;
     color: #AAA6A6;
     font-size: 18px;
     display: flex;

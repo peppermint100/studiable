@@ -21,7 +21,7 @@ const LoginForm = () => {
     })
 
     return (
-        <div>
+        <div style={{width: "fit-content"}}>
             <Formik initialValues={{ email: "", password: "" }} onSubmit={(data, { setSubmitting }) => {
                 setSubmitting(true)
                 // api calls

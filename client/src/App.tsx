@@ -6,9 +6,11 @@ import { HomePage, LoginPage, SignUpPage } from './pages';
 const GlobalStyle = createGlobalStyle`
   body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, 
   form, fieldset, input, p, blockquote, table, th, td, embed, object {
+    width: 100%;
     font-family: "Roboto";
     padding: 0;
     margin: 0; 
+      overflow-x: hidden; 
     }
   table {
     border-collapse: collapse;
@@ -56,5 +58,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

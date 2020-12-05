@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useCookies } from "react-cookie";
-import { useDispatch, useSelector } from 'react-redux';
-import { meRequest } from '../../redux/actions/Auth/authActions';
+import {  useDispatch, useSelector } from 'react-redux';
 import { RootReducerType } from '../../redux/reducers/rootReducer';
+import { useCookies } from 'react-cookie';
+import { meRequest } from '../../redux/actions/Auth/authActions';
 
 const Navbar = () => {
     const history = useHistory();
@@ -18,7 +18,7 @@ const Navbar = () => {
             const token = cookies.Authorization;
             dispatch(meRequest(token));
         }
-    }, [])
+    }, [cookies, setCookies])
 
     const toLoginPage = () => {
         history.push("/login");

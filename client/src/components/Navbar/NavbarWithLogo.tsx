@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import {  useDispatch, useSelector } from 'react-redux';
 import { RootReducerType } from '../../redux/reducers/rootReducer';
@@ -33,16 +33,23 @@ const NavbarWithLogo = () => {
         history.push("/mypage");
     }
 
+    const logout = () => {
+        setCookies("Authorization", null);
+        dispatch(meRequest(cookies.Authorization));
+    }
+
     return (
         <NavBarContainer>
             <NavInnerContainer>
-                <NavigationSection>
                 {
                     currentUser.email && currentUser.username ?
                     (
+                        <>
                             <HelloUserNav>안녕하세요 
-                                <UserName onClick={toMyPage}>{currentUser.username}</UserName>
-                            님</HelloUserNav>
+                                <UserName onClick={toMyPage}>{currentUser.username}</UserName>님
+                                <LogoutButton onClick={logout}>로그아웃</LogoutButton>
+                            </HelloUserNav>
+                        </>
                     )
                     :
                     (
@@ -53,11 +60,10 @@ const NavbarWithLogo = () => {
                         </>
                     )
                 }
-                </NavigationSection>
             </NavInnerContainer>
-                <LogoSection>
-                    <Logo />
-                </LogoSection>
+            <LogoSection>
+                <Logo />
+            </LogoSection>
         </NavBarContainer>
     )
 }
@@ -74,7 +80,12 @@ const NavInnerContainer = styled.div`
     justify-content: flex-end;
 `
 
-const NavigationSection = styled.section``;
+const LogoutButton = styled.button`
+    margin-left: 20px;
+    color: #773300;
+    cursor: pointer;
+`
+
 const LogoSection = styled.section`
     margin-top: 50px;
     display: flex;

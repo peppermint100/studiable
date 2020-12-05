@@ -8,6 +8,7 @@ export function* _meRequest({payload: { token }}: { payload: any }) {
         const res = yield call(getAuth, token);
         yield put(loginReceiveData(res));
     }catch(err: any){
+        yield put(loginReceiveData({ token : "" , email: "", username: "", userId: ""}));
         yield put(pushMessage(err.message));
     }
 }

@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Roboto";
     padding: 0;
     margin: 0; 
-      overflow-x: hidden; 
+    overflow-x: hidden; 
     }
   table {
     border-collapse: collapse;

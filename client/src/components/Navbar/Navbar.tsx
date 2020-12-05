@@ -28,6 +28,10 @@ const Navbar = () => {
         history.push("/signup");
     }
 
+    const logout = () => {
+        setCookies("Authorization", null);
+    }
+
     return (
         <NavBarContainer>
             <NavInnerContainer>
@@ -36,6 +40,7 @@ const Navbar = () => {
                     (
                         <>
                             <p>안녕하세요 {currentUser.username}님</p>
+                            <button onClick={logout}>로그아웃</button>
                         </>
                     )
                     :

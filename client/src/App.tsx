@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0; 
     overflow-x: hidden; 
+    box-sizing: border-box;
     }
   table {
     border-collapse: collapse;

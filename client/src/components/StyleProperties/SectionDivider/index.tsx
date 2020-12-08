@@ -10,6 +10,7 @@ interface Props {
     fontWeight?: string;
     dividerWidth?: string;
     textMargin?: string;
+    lineHeight?: string;
 }
 
 const SectionDivider: React.FC<Props> = (props) => {
@@ -22,14 +23,11 @@ const SectionDivider: React.FC<Props> = (props) => {
 
 interface TextStyleProps {
    fontWeight?: string; 
-   textMargin?: string;
 }
 
 const Text = styled.span<TextStyleProps>`
     font-weight: ${props => props.fontWeight ? props.fontWeight : "500"};
     text-align: center;
-    margin-left: ${props => props.textMargin ? props.fontWeight : "10px"};
-    margin-right: ${props => props.textMargin ? props.fontWeight : "10px"};
 `
 
 const FormBreaker = styled.div<Props>`
@@ -42,17 +40,19 @@ const FormBreaker = styled.div<Props>`
         content: "";
         display: block;
         width : ${props => props.lineWidth ? props.lineWidth : "100px"};
-        height: 1px;
+        height: ${props => props.lineHeight ? props.lineHeight : "1px"}; 
         background-color: ${props => props.lineColor ? props.lineColor: "#AAA6A6"};
         line-height: ${props => props.fontSize ? props.fontSize: "16px"};
+        margin-right: ${props => props.textMargin ? props.textMargin : "10px"};
     }    
     &::after{
         content: "";
         display: inline-block;
         width : ${props => props.lineWidth ? props.lineWidth : "100px"};
-        height: 1px;
+        height: ${props => props.lineHeight ? props.lineHeight : "1px"}; 
         background-color: ${props => props.lineColor ? props.lineColor: "#AAA6A6"};
         line-height: ${props => props.fontSize ? props.fontSize: "16px"};
+        margin-left: ${props => props.textMargin ? props.textMargin : "10px"};
     }    
 `
 

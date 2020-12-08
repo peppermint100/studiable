@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react'
-import getAuth from '../api/Auth/getAuth'
-import CafeList from '../components/CafeList/CafeList'
+import React from 'react'
+import CafeInfo from '../components/CafeInfo/CafeInfo'
 import Jumbotron from '../components/Jumbotron/Jumbotron'
-import SearchBar from '../components/Jumbotron/SearchBar'
-import Navbar from '../components/Navbar/Navbar'
 import NavbarFooterWrapper from '../components/Wrappers/NavbarFooterWrapper'
 
 const HomePage = () => {
@@ -11,7 +8,7 @@ const HomePage = () => {
         <NavbarFooterWrapper>
             <div>
                 <Jumbotron />
-                <CafeList />
+                <CafeInfo />
             </div>
         </NavbarFooterWrapper>
     )

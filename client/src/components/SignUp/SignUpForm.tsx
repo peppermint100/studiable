@@ -43,9 +43,9 @@ const SignUpForm = () => {
                             <Label>비밀번호</Label>
                             <FormInput type="password" name="password" placeholder="   Password" value={values.password} onChange={handleChange} />
                         </FormSection>
-                        <div>
+                        <FormSection>
                             <FormInput type="password" name="confirmPassword" placeholder="   Confirm Password" value={values.confirmPassword} onChange={handleChange} />
-                        </div>
+                        </FormSection>
                         <br />
                         <FormButton type="submit" disabled={isSubmitting}>Sign Up</FormButton>
                         <br />

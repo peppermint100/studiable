@@ -28,7 +28,7 @@ class CafeController implements basicController{
         this.controller.delete("/delete/:cafeId", this.authController.requireAuth, this.deleteCafeByCafeId);
     }
 
-    getAllCafe = async (req: Request, res:Response) => {
+    getAllCafe = async (_: any, res:Response) => {
        const cafe = await this.cafeService.getAllCafe(); 
 
        return res.json({cafe});
@@ -44,7 +44,6 @@ class CafeController implements basicController{
             if(err) res.status(err.status).json({ message: err.message});
         })
     }
-
 
     getAllCafeByUserId = async (req: Request, res: Response) => {
         const { userId } = req.params;

@@ -7,8 +7,8 @@ import SearchBar from './SearchBar';
 const Jumbotron = () => {
     return (
         <Container>
-            <BackgroundImage src={MainImage}/>
-            <MainTextImage src={MainText} />
+            <BackgroundImage draggable="false" src={MainImage}/>
+            <MainTextImage draggable="false" src={MainText} />
             <SearchBarSection>
                 <SearchBar />
             </SearchBarSection>

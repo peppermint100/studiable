@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import LoginForm from '../components/Login/LoginForm'
 import Logo from '../components/StyleProperties/Logo/Logo'
+import SectionDivider from '../components/StyleProperties/SectionDivider'
 import NavbarWrapper from '../components/Wrappers/NavbarWrapper'
 
 const LoginPage = () => {
@@ -10,7 +11,7 @@ const LoginPage = () => {
             <InnerContainer>
                 <Content>
                     <Logo />
-                    <FormBreaker>LOG IN WITH E-MAIL</FormBreaker>
+                    <SectionDivider lineWidth="110px" text="LOG IN WITH-E-MAIL"  />
                     <LoginForm />
                 </Content>
             </InnerContainer>
@@ -33,32 +34,6 @@ const Content = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
-const FormBreaker = styled.div`
-    width: fit-content;
-    color: #AAA6A6;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    &::before{
-        content: "";
-        display: inline-block;
-        width: 95px;
-        height: 1px;
-        background-color: #AAA6A6;
-        line-height: 18px;
-        margin-right: 10px;
-    }    
-    &::after{
-        content: "";
-        display: inline-block;
-        width: 95px;
-        height: 1px;
-        background-color: #AAA6A6;
-        line-height: 18px;
-        margin-left: 10px;
-    }    
-`
 
 export default LoginPage
 

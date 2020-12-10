@@ -14,7 +14,7 @@ const CafeInfo = () => {
 
     useEffect(() => {
         dispatch(requestGetAllCafe());
-    }, [])
+    }, [dispatch])
 
     return (
         <Container>
@@ -60,8 +60,7 @@ const InnerContainer = styled.div`
 `
 
 const CafeListContainer = styled.div`
-    display: flex;
-    flex-direction: column;
+    display: grid;
 `
 
 

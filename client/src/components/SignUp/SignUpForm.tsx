@@ -18,7 +18,7 @@ const SignUpForm = () => {
         if(registerSuccessStatus === 200){
             history.push("/login");
         }
-    }, [registerSuccessStatus])
+    }, [registerSuccessStatus, history])
 
     return (
         <div style={{ width: "fit-content"}}>

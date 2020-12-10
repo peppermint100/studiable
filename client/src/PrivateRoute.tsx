@@ -7,7 +7,7 @@ import { meRequest } from "./redux/actions/Auth/authActions";
 
 const PrivateRoute: React.FC<{component: any}> = ({ component: Component, ...rest}) => {
 
-    const [cookies, setCookies] = useCookies();
+    const [cookies, _] = useCookies();
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootReducerType) => state.authReducers);
 
@@ -16,7 +16,7 @@ const PrivateRoute: React.FC<{component: any}> = ({ component: Component, ...res
             const token = cookies.Authorization;
             dispatch(meRequest(token));
         }
-    }, [])
+    }, [dispatch])
 
     return(
         <Route {...rest} 

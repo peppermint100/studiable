@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import {  useDispatch, useSelector } from 'react-redux';
 import { RootReducerType } from '../../redux/reducers/rootReducer';
@@ -19,7 +19,7 @@ const NavbarWithLogo = () => {
             const token = cookies.Authorization;
             dispatch(meRequest(token));
         }
-    }, [cookies, setCookies])
+    }, [cookies, setCookies, dispatch])
 
     const toLoginPage = () => {
         history.push("/login");

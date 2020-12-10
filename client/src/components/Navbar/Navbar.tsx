@@ -18,7 +18,7 @@ const Navbar = () => {
             const token = cookies.Authorization;
             dispatch(meRequest(token));
         }
-    }, [cookies, setCookies])
+    }, [cookies, setCookies, dispatch])
 
     const toLoginPage = () => {
         history.push("/login");

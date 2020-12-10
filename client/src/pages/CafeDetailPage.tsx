@@ -6,11 +6,12 @@ const CafeDetailPage = () => {
 
     const location = useLocation();
     
-    const { cafeName, imageLocation, cafeId } = location.state as CafeDataTypeClient;
+    // const { cafeName, imageLocation, cafeId } = location.state as CafeDataTypeClient;
 
     return (
         <div>
-            { cafeName }
+            {/* { cafeName } */}
+            feawjf
         </div>
     )
 }

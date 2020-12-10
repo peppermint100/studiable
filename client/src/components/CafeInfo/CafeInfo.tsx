@@ -6,11 +6,17 @@ import Cafe from './Cafe'
 import { requestGetAllCafe } from "./../../redux/actions/Cafe/CafeActions";
 import { RootReducerType } from '../../redux/reducers/rootReducer'
 import CafeDataTypeClient from '../../types/Cafe/CafeDataTypeClient'
+import { useHistory } from 'react-router-dom'
 
 const CafeInfo = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const cafeList = useSelector((state: RootReducerType) => state.cafeReducer);
+
+    const toCafeCreatePage = () => {
+        history.push("/cafe/create");
+    }
 
     useEffect(() => {
         dispatch(requestGetAllCafe());
@@ -21,6 +27,11 @@ const CafeInfo = () => {
             <InnerContainer>
                 <section>
                     <SectionDivider text="카페정보" textMargin="30px" fontSize="24px" fontWeight="600" fontColor="#000" lineColor="#AAA6A6" lineWidth="550px" lineHeight="2px" />
+                </section>
+                <section>
+                    <CafeCreateButton onClick={toCafeCreatePage}>
+                        <div>+</div>
+                    </CafeCreateButton>
                 </section>
                 <section>
                     <CafeListContainer>
@@ -61,6 +72,24 @@ const InnerContainer = styled.div`
 
 const CafeListContainer = styled.div`
     display: grid;
+`
+
+const CafeCreateButton = styled.button`
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: #773300; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > div {
+        display: block;
+        color: #fff;
+        font-size: 60px;
+    }
 `
 
 

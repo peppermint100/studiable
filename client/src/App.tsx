@@ -3,6 +3,8 @@ import { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomePage, LoginPage, SignUpPage } from './pages';
 import CafeDetailPage from './pages/CafeDetailPage';
+import PrivateRoute from "./PrivateRoute";
+import CafeCreatePage from './pages/CafeCreatePage';
 
 const GlobalStyle = createGlobalStyle`
   body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, 
@@ -55,7 +57,8 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
-          <Route exact path="/cafe/:cafeId" component={CafeDetailPage} />
+          <PrivateRoute exact path="/cafe/create" component={CafeCreatePage} />
+          <PrivateRoute exact path="/cafe/:cafeId" component={CafeDetailPage} />
         </Switch>
       </Router>
     </div>

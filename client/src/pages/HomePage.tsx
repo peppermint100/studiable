@@ -1,5 +1,5 @@
 import React from 'react'
-import CafeInfo from '../components/CafeInfo/CafeInfo'
+import CafeInfo from '../components/Cafe/CafeInfo'
 import Jumbotron from '../components/Jumbotron/Jumbotron'
 import NavbarFooterWrapper from '../components/Wrappers/NavbarFooterWrapper'
 

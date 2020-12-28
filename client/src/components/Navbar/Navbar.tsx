@@ -61,6 +61,7 @@ const Navbar = () => {
 const NavBarContainer = styled.nav`
     background-color: transparent;
     height: 50px;
+    overflow-x: hidden;
 `
 
 const NavInnerContainer = styled.div`

@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Footer from '../Footer/Footer'
-import Navbar from '../Navbar/Navbar'
 import NavbarWithLogo from '../Navbar/NavbarWithLogo'
 
 interface Props {
@@ -26,7 +25,6 @@ const Container = styled.div`
     `
 
 const RestContainer = styled.div`
-    min-width: 100vw;
     min-height: calc(100vh - 300px); // white space need between any +/-
 `
 

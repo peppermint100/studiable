@@ -7,7 +7,8 @@ interface CafeCreateRequest {
     cafeFeatures?: Array<Feature>;
     cafeScore?: number;
     americanoPrice?: number;
-    cafeLocation?: string;
+    cafeLocationLat?: number;
+    cafeLocationLng?: number;
     imageLocation?: string;
     user: GetAuthResultType;
 }

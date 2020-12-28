@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import LoginForm from '../components/Login/LoginForm'
+import LoginForm from '../components/Form/Login/LoginForm'
 import Logo from '../components/StyleProperties/Logo/Logo'
 import SectionDivider from '../components/StyleProperties/SectionDivider'
 import NavbarWrapper from '../components/Wrappers/NavbarWrapper'

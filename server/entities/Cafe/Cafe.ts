@@ -26,7 +26,10 @@ export class Cafe extends BaseEntity{
     americanoPrice!: number;
 
     @Column({ nullable: true })
-    cafeLocation!: string; // requires types for google map location 
+    cafeLocationLat!: number; // requires types for google map location 
+
+    @Column({ nullable: true })
+    cafeLocationLng!: number; // requires types for google map location 
 
     // image location
     @Column({ nullable: true })

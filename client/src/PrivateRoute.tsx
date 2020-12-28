@@ -1,23 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import {  useSelector } from "react-redux";
-import { RootReducerType } from "./redux/reducers/rootReducer";
 
-const PrivateRoute: React.FC<any> = ({ component: Component, ...rest}) => {
-
-    const currentUser = useSelector((state: RootReducerType) => state.authReducers);
-
+const PrivateRoute: React.FC<any> = ({ component: Component, currentUser, ...rest}) => {
       return(
         <Route
             {...rest}
             render={routeProps =>
-                !!(currentUser.email && currentUser.username) ? (
-                <Component {...routeProps} />
-                ) : (
-                <Redirect to={"/login"} />
-                )
-            }
-            />
+                (currentUser.username && currentUser.email)
+                ? <Component {...routeProps} />
+                : <Redirect to="/login" />
+            }/>
     )
 }
 

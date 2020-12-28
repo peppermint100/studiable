@@ -2,6 +2,8 @@
 ☕☕ Find and Share studiable coffeeshop. 
 
 ## Todo
+- [ ] search place debounce
+- [ ] on select place, result disappear
 
 ## Stack
 #### Front

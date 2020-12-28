@@ -8,7 +8,7 @@ interface Props extends CafeDataTypeClient {
    
 }
 
-const Cafe: React.FC<Props>= ({ imageLocation, cafeName, cafeId, cafeScore, cafeLocation, cafeFeatures  }) => {
+const Cafe: React.FC<Props>= ({ imageLocation, cafeName, cafeId, cafeScore, cafeLocationLat, cafeLocationLng, cafeFeatures  }) => {
 
   const history = useHistory();
 
@@ -19,7 +19,7 @@ const Cafe: React.FC<Props>= ({ imageLocation, cafeName, cafeId, cafeScore, cafe
     return (
         <Container>
           <ImageSection>
-            <img src={imageLocation ? imageLocation : defaultCafeImage} />
+            <img src={imageLocation ? imageLocation : defaultCafeImage} alt="cafeimg" />
           </ImageSection>
           <InfoSection>
             <InnerInfoSection onClick={() => {
@@ -38,7 +38,7 @@ const Cafe: React.FC<Props>= ({ imageLocation, cafeName, cafeId, cafeScore, cafe
                   주소 : 
                 </Label>
                 <p>
-                 { cafeLocation }
+                  위치
                 </p>
               </InfoText>
               <InfoText>

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import SignUpForm from '../components/SignUp/SignUpForm'
+import SignUpForm from '../components/Form/SignUp/SignUpForm'
 import Logo from '../components/StyleProperties/Logo/Logo'
 import SectionDivider from '../components/StyleProperties/SectionDivider'
 import NavbarWrapper from '../components/Wrappers/NavbarWrapper'

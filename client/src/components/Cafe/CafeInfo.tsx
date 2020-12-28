@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import SectionDivider from '../StyleProperties/SectionDivider'
 import Cafe from './Cafe'
-import { requestGetAllCafe } from "./../../redux/actions/Cafe/CafeActions";
+import { requestGetAllCafe } from "../../redux/actions/Cafe/CafeActions";
 import { RootReducerType } from '../../redux/reducers/rootReducer'
 import CafeDataTypeClient from '../../types/Cafe/CafeDataTypeClient'
 import { useHistory } from 'react-router-dom'
@@ -30,7 +30,7 @@ const CafeInfo = () => {
                 </section>
                 <section>
                     <CafeCreateButton onClick={toCafeCreatePage}>
-                        <div>+</div>
+                        <p>등록하기</p>
                     </CafeCreateButton>
                 </section>
                 <section>
@@ -56,7 +56,7 @@ const CafeInfo = () => {
 }
 
 const Container = styled.div`
-    background-color: #F2EBE6;
+    background-color: ${props => props.theme.colors.secondary};
 `
 
 const InnerContainer = styled.div`
@@ -66,7 +66,6 @@ const InnerContainer = styled.div`
     & > section {
         display: flex;
         justify-content: center;
-        margin: 50px 0;
     }
 `
 
@@ -77,20 +76,12 @@ const CafeListContainer = styled.div`
 const CafeCreateButton = styled.button`
     cursor: pointer;
     font-weight: 700;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    background-color: #773300; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    & > div {
-        display: block;
-        color: #fff;
-        font-size: 60px;
-    }
+    border-radius: 5px;
+    width: 100px;
+    height: 50px;
+    background-color: ${props => props.theme.colors.primary}; 
+    color: #fff;
+    text-align: center;
 `
-
 
 export default CafeInfo;

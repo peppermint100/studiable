@@ -17,7 +17,7 @@ const store = createStore(RootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(saga);
 store.subscribe(() => {
-  console.log(store.getState());
+  console.log("redux store : ", store.getState());
 });
 
 ReactDOM.render(

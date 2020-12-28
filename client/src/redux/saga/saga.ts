@@ -1,5 +1,5 @@
 import { TakeableChannel } from "redux-saga";
-import {  takeLatest } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
 
 import { LOG_IN_REQUEST, ME_REQUEST, SIGN_UP_REQUEST } from "../actions/Auth/authActions";
 import { REQUEST_GET_ALL_CAFE } from "../actions/Cafe/CafeActions";

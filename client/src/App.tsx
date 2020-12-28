@@ -1,67 +1,40 @@
 import React from 'react';
-import { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomePage, LoginPage, SignUpPage } from './pages';
 import CafeDetailPage from './pages/CafeDetailPage';
 import PrivateRoute from "./PrivateRoute";
-import CafeCreatePage from './pages/CafeCreatePage';
+import CafeCreationPage from './pages/CafeCreationPage';
+import { ThemeProvider } from 'styled-components';
+import { useSelector } from 'react-redux';
+import { RootReducerType } from './redux/reducers/rootReducer';
+import GlobalStyles from './GlobalStyles';
 
-const GlobalStyle = createGlobalStyle`
-  body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, 
-  form, fieldset, input, p, blockquote, table, th, td, embed, object {
-    width: 100%;
-    font-family: "Roboto";
-    padding: 0;
-    margin: 0; 
-    overflow-x: hidden; 
-    box-sizing: border-box;
-    }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    }
-  fieldset, img, abbr {
-    border: 0;
-    }
-  address, caption, cite, code, dfn, em, 
-  h1, h2, h3, h4, h5, h6, strong, th, var {
-    font-weight: normal;
-    font-style: normal;
-    }
-  ul {
-    list-style: none;
-    }
-  caption, th {
-    text-align: left;
-    }
-  h1, h2, h3, h4, h5, h6 {
-    font-size: 1.0em;
-    }
-  q:before, q:after {
-    content: '';
-    }
-  a, ins {
-    text-decoration: none;
-    }
-  button, input{
-    all: unset;
+const theme = {
+  colors: {
+    primary : "#773300",
+    secondary: "#F2EBE6",
+    lightGray: "#AAA6A6",
+    silver: "#bdc3c7",
+    darkSilver: "#7f8c8d"
   }
-`
+}
 
 function App() {
+  const currentUser = useSelector((state: RootReducerType) => state.authReducers);
+
   return (
-    <div>
-      <GlobalStyle />
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
-          <PrivateRoute exact path="/cafe/create" component={CafeCreatePage} />
-          <PrivateRoute exact path="/cafe/:cafeId" component={CafeDetailPage} />
+          <PrivateRoute exact path="/cafe/create" component={CafeCreationPage} currentUser={currentUser} />
+          <PrivateRoute exact path="/cafe/:cafeId" component={CafeDetailPage} currentUser={currentUser} />
         </Switch>
       </Router>
-    </div>
+    </ThemeProvider>
   );
 }
 

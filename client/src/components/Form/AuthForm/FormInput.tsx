@@ -1,11 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
+interface Props {
+    styleProps?: React.CSSProperties;
+    [x:string]: any;
+}
 
-const FormInput = ({ ...props}) => {
+const FormInput: React.FC<Props> = ({styleProps, ...rest}) => {
+
     return (
         <>
-            <Input {...props}/>
+            <Input style={styleProps} {...rest}/>
         </>
     )
 }

@@ -1,10 +1,10 @@
 enum Feature {
-    TOILET,
-    SMOKING_ROOM,
-    WIFI,
-    PARKING,
-    LAPTOP_CHARGE,
-    AIR_CONDITIONING,
+    TOILET="Restroom",
+    SMOKING_ROOM="Smoking",
+    WIFI="Wifi",
+    PARKING="Parking",
+    LAPTOP_CHARGE="charginStation",
+    AIR_CONDITIONING="Fan",
 }
 
 

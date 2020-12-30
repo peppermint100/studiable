@@ -1,16 +1,18 @@
 import { combineReducers } from "redux";
-import authReducers from "./../reducers/Auth/authReducers";
+import userReducer from "./Auth/userReducer";
 import messageReducer from "./Message/messageReducer";
 import cafeReducer from "./Cafe/cafeReducer";
 import mapReducer from "./Map/mapReducer";
 import searchPlacesResultsReducer from "./Map/searchPlacesResultsReducer";
+import signUpReducer from "./Auth/signUpReducer";
 
 const RootReducer = combineReducers({
-    authReducers,
+    userReducer,
     messageReducer,
     cafeReducer,
     mapReducer,
-    searchPlacesResultsReducer
+    searchPlacesResultsReducer,
+    signUpReducer
 });
 
 export type RootReducerType = ReturnType<typeof RootReducer>;

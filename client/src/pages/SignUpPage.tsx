@@ -1,35 +1,28 @@
-import React from 'react'
-import styled from 'styled-components'
-import SignUpForm from '../components/Form/SignUp/SignUpForm'
-import Logo from '../components/StyleProperties/Logo/Logo'
-import SectionDivider from '../components/StyleProperties/SectionDivider'
-import NavbarWrapper from '../components/Wrappers/NavbarWrapper'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SignUpForm from '../components/Form/SignUpForm/SignUpForm';
+import logoImg from "./../assets/logo.png";
 
 const SignUpPage = () => {
     return (
-        <NavbarWrapper>
-            <Center>
-                <Content>
-                    <Logo />
-                    <SectionDivider lineWidth="110px" text="SIGN UP WITH E-MAIL"  />
+        <div className="w-full h-screen bg-secondary flex justify-center items-center">
+            <div className="w-max">
+                <div className="flex flex-col items-center">
+                    <img className="w-max" src={logoImg} alt="logo"/>
+                    <span className="text-gray-500 font-bold">SIGN-UP WITH E-MAIL</span>
                     <SignUpForm />
-                </Content>
-            </Center>
-        </NavbarWrapper>
+                    <div className="w-full flex justify-around">
+                        <p className="text-gray-500">이미 계정이 있으신가요?</p>
+                        <span className="text-primary">
+                            <Link to={"/login"}>로그인</Link>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 
-const Center = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 50px);
-`;
 
-const Content = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
+export default SignUpPage;
 
-export default SignUpPage

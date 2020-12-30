@@ -1,4 +1,4 @@
-import GetAuthResultType from "../Auth/GetAuthResultType";
+import { CurrentUserType } from "../Auth/CurrentUserType";
 import Feature from "../Feature";
 
 interface CafeCreateRequest {
@@ -10,7 +10,7 @@ interface CafeCreateRequest {
     cafeLocationLat?: number;
     cafeLocationLng?: number;
     imageLocation?: string;
-    user: GetAuthResultType;
+    user: CurrentUserType;
 }
 
 export default CafeCreateRequest;

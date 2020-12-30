@@ -1,14 +1,19 @@
-import { signUpReceiveData, SignUpReqeustType } from './../../actions/Auth/authActions';
-import { signup } from './../../../api/Auth/SignUp';
+import { signUp } from './../../../api/Auth/signUp';
+import { signUpReceiveFailure, signUpReceiveSuccess, SignUpReqeustType } from './../../actions/Auth/authActions';
 import { call, put } from "redux-saga/effects";
 import { pushMessage } from '../../actions/Message/messageAction';
 
-export function* _signUpRequest({ payload: { username, email, password, confirmPassword} }: SignUpReqeustType) {
-    try{
-        const res = yield call(signup, username, email, password, confirmPassword);
-        yield put(pushMessage(res.data?.message));
-        yield put(signUpReceiveData(res.status));
-    }catch(err: any){
-        yield put(pushMessage(err.message));
-    }
+export function* _signUpRequest({ payload }: SignUpReqeustType) {
+        try{
+            const res = yield call(signUp , payload);
+            if(res.error){
+                yield put(pushMessage(res.message));
+                yield put(signUpReceiveFailure({result: null, error: res.error, loading: false}));
+            }else{
+                yield put(pushMessage(res.message));
+                yield put(signUpReceiveSuccess({ result: res, loading: false, error: null}));
+            }
+        }catch(err){
+            console.error(err);
+        }
 }

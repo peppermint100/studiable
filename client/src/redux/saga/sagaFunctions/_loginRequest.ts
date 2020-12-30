@@ -1,14 +1,23 @@
-import { call, put } from "redux-saga/effects";
-import { login } from "../../../api/Auth/Login";
-import { loginReceiveData, LoginRequestType } from "../../actions/Auth/authActions";
+import { loginReceiveFailure, loginReceiveSuccess } from './../../actions/Auth/authActions';
+import { LoginRequestType } from "../../actions/Auth/authActions";
 import { pushMessage } from '../../actions/Message/messageAction';
+import * as Effects from "redux-saga/effects";
+import { login } from '../../../api/Auth/login';
 
-export function* _loginRequest({ payload: { email, password } }: LoginRequestType) {
+const call: any = Effects.call;
+const put: any = Effects.put;
+
+export function* _loginRequest({ payload }: LoginRequestType) {
     try{
-        const res = yield call(login, email, password);
-            yield put(pushMessage(res.data.message));
-            yield put(loginReceiveData(res.data));
-    }catch(err: any){
-        yield put(pushMessage(err.message));
+        const res = yield call(login, payload);
+        if(res.error){
+                yield put(pushMessage(res.message));
+                yield put(loginReceiveFailure());
+            }else{
+                const { email, username, userId } = res;
+                yield put(loginReceiveSuccess({email, username, userId}));
+            }
+    }catch(err){
+        console.error(err);
     }
 }

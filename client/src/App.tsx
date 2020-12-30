@@ -1,30 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { HomePage, LoginPage, SignUpPage } from './pages';
-import CafeDetailPage from './pages/CafeDetailPage';
+import { HomePage, LoginPage, SignUpPage, CafeCreationPage, CafeDetailPage } from './pages';
 import PrivateRoute from "./PrivateRoute";
-import CafeCreationPage from './pages/CafeCreationPage';
-import { ThemeProvider } from 'styled-components';
-import { useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { RootReducerType } from './redux/reducers/rootReducer';
-import GlobalStyles from './GlobalStyles';
+import { CookiesProvider } from "react-cookie";
 
-const theme = {
-  colors: {
-    primary : "#773300",
-    secondary: "#F2EBE6",
-    lightGray: "#AAA6A6",
-    silver: "#bdc3c7",
-    darkSilver: "#7f8c8d"
-  }
-}
+import "./style/main.css";
 
 function App() {
-  const currentUser = useSelector((state: RootReducerType) => state.authReducers);
+  const currentUser = useSelector((state: RootReducerType) => state.userReducer)
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
+    <CookiesProvider>
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
@@ -34,9 +22,8 @@ function App() {
           <PrivateRoute exact path="/cafe/:cafeId" component={CafeDetailPage} currentUser={currentUser} />
         </Switch>
       </Router>
-    </ThemeProvider>
+    </CookiesProvider>
   );
 }
-
 
 export default App;

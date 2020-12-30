@@ -1,94 +1,62 @@
-import React, { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import {  useDispatch, useSelector } from 'react-redux';
-import { RootReducerType } from '../../redux/reducers/rootReducer';
-import { useCookies } from 'react-cookie';
-import { meRequest } from '../../redux/actions/Auth/authActions';
+import React from 'react'
+import logoImg from "./../../assets/logo.png";
+import { Link, useHistory } from "react-router-dom";
+import {  useDispatch } from 'react-redux';
+import { useCookies } from "react-cookie";
+import { loginReceiveFailure } from '../../redux/actions/Auth/authActions';
 
 const Navbar = () => {
+    const [cookies, setCookies] = useCookies(['Authorization']);
     const history = useHistory();
+    const token = cookies.Authorization;
     const dispatch = useDispatch();
-    const currentUser = useSelector((state: RootReducerType) => state.authReducers);
 
-    const [cookies, setCookies] = useCookies();
-
-    useEffect(() => {
-        if(cookies.Authorization){
-            const token = cookies.Authorization;
-            dispatch(meRequest(token));
-        }
-    }, [cookies, setCookies, dispatch])
-
-    const toLoginPage = () => {
-        history.push("/login");
-    }
-
-    const toSignUpPage = () => {
-        history.push("/signup");
+    const toHomePage = () => {
+        history.push("/");
     }
 
     const logout = () => {
-        setCookies("Authorization", null);
+        dispatch(loginReceiveFailure());
+        setCookies('Authorization', "");
+        history.push("/");
     }
 
     return (
-        <NavBarContainer>
-            <NavInnerContainer>
+        <nav className="w-full mt-10">
+            <div className="w-max mx-auto my-auto">
+                <img className="cursor-pointer" onClick={toHomePage} src={logoImg} alt="logo" draggable="false"/>
                 {
-                    currentUser.email && currentUser.username ?
+                    !token ? (
+                        <div className="text-center mt-4">
+                             <span className="mr-4 font-bold text-xl">
+                                <Link to={"/login"}>Login</Link>
+                            </span>
+                            <span className="mr-4 font-bold text-xl">
+                                <Link to={"/signup"}>Sign Up</Link>
+                            </span>
+                            <span className="mr-4 font-bold text-xl">
+                                <Link to={"/about"}>About</Link>
+                            </span>
+                        </div>
+                    ) :
                     (
-                        <>
-                            <p>안녕하세요 {currentUser.username}님</p>
-                            <button onClick={logout}>로그아웃</button>
-                        </>
-                    )
-                    :
-                    (
-                        <>
-                            <LoginButton onClick={toLoginPage}>LOGIN</LoginButton> 
-                            <LightGrayBar />
-                            <SignUpButton onClick={toSignUpPage}>SIGN UP</SignUpButton>
-                        </>
+                            <div className="text-center mt-4">
+                            <span className="mr-4 font-bold text-xl">
+                                <Link to={"/mypage"}>My Page</Link>
+                            </span>
+                            <span className="mr-4 font-bold text-xl">
+                                <button className="border-0 cursor-pointer" onClick={logout}>Log Out</button>
+                            </span>
+                            <span className="mr-4 font-bold text-xl">
+                                <Link to={"/about"}>ABOUT</Link>
+                            </span>
+                        </div>
                     )
                 }
                 
-            </NavInnerContainer>
-        </NavBarContainer>
+            </div>
+        </nav>
     )
 }
-
-const NavBarContainer = styled.nav`
-    background-color: transparent;
-    height: 50px;
-    overflow-x: hidden;
-`
-
-const NavInnerContainer = styled.div`
-    width: 75%;
-    display: flex;
-    justify-content: flex-end;
-`
-
-const LightGrayBar = styled.span`
-    display: inline-block;
-    width: 1.2px;
-    height: 50px;
-    background-color: #CCCCCC;
-    margin: 0 13px;
-`
-
-const LoginButton = styled.button`
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 30px;
-    cursor: pointer;
-`;
-const SignUpButton = styled.button`
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 30px;
-    cursor: pointer;
-`;
 
 export default Navbar;

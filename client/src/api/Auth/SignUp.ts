@@ -1,11 +1,16 @@
 import axios from "axios";
 import axiosConfigs from "../../configs/axiosConfigs";
+import RegisterRequest from '../../types/Auth/RegisterRequest';
 
-export const signup = async (username: string, email: string, password: string, confirmPassword: string) => {
+export const signUp = async (values: RegisterRequest)=> {
     try{
-        const res = await axios.post("/auth/signup", { username, email, password, confirmPassword }, axiosConfigs)
-        return res;
+        const res = await axios.post("/auth/signup", values, axiosConfigs)
+        return res.data;
     }catch(err: any){
-        throw new Error(err.response.data.message);
+        if(err.response){
+            return { message: err.response.data.message, error: err.response};
+        }else{
+            return { message: "회원가입에 실패하였습니다.", error: err.response};
+        }
     }
 }

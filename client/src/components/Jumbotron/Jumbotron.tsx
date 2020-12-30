@@ -1,46 +1,18 @@
 import React from 'react'
-import styled from 'styled-components'
-import MainImage from "./../../assets/main.svg";
-import MainText from "./../../assets/mainText.svg";
-import SearchBar from './SearchBar';
+import SearchBarInput from '../Input/SearchBarInput';
+import jumboBgImage from "./../../assets/main.svg";
+import jumboTextImage from "./../../assets/mainText.svg";
 
 const Jumbotron = () => {
     return (
-        <Container>
-            <BackgroundImage draggable="false" src={MainImage}/>
-            <MainTextImage draggable="false" src={MainText} />
-            <SearchBarSection>
-                <SearchBar />
-            </SearchBarSection>
-        </Container>
+        <div className="relative mt-5">
+                <img className="z-0" src={jumboBgImage} alt="jumbo-img" draggable="false" />
+                <div className="absolute top-1/2 left-1/2 h-96 flex flex-col justify-around" style={{ transform: "translate(-50%, -50%)"}}>
+                    <img src={jumboTextImage} alt="jumbo-text" draggable="false"/>
+                    <SearchBarInput />
+                </div>
+        </div>
     )
 }
 
-const Container = styled.div`
-    position: relative;
-    height: 500px;
-`
-
-const BackgroundImage = styled.img`
-    position: absolute;
-    width: 100%;
-    z-index: 100;
-`
-
-const MainTextImage = styled.img`
-    z-index: 200;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`
-
-const SearchBarSection = styled.section`
-    z-index: 300;
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`
-
-export default Jumbotron;
+export default Jumbotron

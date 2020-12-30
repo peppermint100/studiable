@@ -30,10 +30,10 @@ class AuthController implements basicController{
 
         await this.authService.signup(registerRequest)
         .then(() => {
-            res.json({ message: "회원가입에 성공했습니다."});
+            res.json({ message: "회원가입에 성공했습니다. 로그인 해주세요."});
         }).catch((err:CustomException) => {
             if(err){
-                res.status(err.status).json({ message: err.message });
+                res.status(err.status).send({ message: err.message });
             }
         });
     }

@@ -1,5 +1,5 @@
 interface LoginReceiveData {
-    token: string;
+    // token: string;
     email: string;
     username: string;
     userId: string;

@@ -22,7 +22,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="w-full mt-10">
+        <nav className="w-full mt-10 font-mono font text-primary">
             <div className="w-max mx-auto my-auto">
                 <img className="cursor-pointer" onClick={toHomePage} src={logoImg} alt="logo" draggable="false"/>
                 {

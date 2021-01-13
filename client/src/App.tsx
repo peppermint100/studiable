@@ -5,6 +5,7 @@ import PrivateRoute from "./PrivateRoute";
 import {  useSelector } from 'react-redux';
 import { RootReducerType } from './redux/reducers/rootReducer';
 import { CookiesProvider } from "react-cookie";
+import "antd/dist/antd.css";
 
 import "./style/main.css";
 

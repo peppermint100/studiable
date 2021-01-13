@@ -1,4 +1,4 @@
-import { signUp } from './../../../api/Auth/signUp';
+import { signUp } from './../../../api/Auth/SignUp';
 import { signUpReceiveFailure, signUpReceiveSuccess, SignUpReqeustType } from './../../actions/Auth/authActions';
 import { call, put } from "redux-saga/effects";
 import { pushMessage } from '../../actions/Message/messageAction';

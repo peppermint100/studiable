@@ -2,7 +2,7 @@ import { loginReceiveFailure, loginReceiveSuccess } from './../../actions/Auth/a
 import { LoginRequestType } from "../../actions/Auth/authActions";
 import { pushMessage } from '../../actions/Message/messageAction';
 import * as Effects from "redux-saga/effects";
-import { login } from '../../../api/Auth/login';
+import { login } from '../../../api/Auth/Login';
 
 const call: any = Effects.call;
 const put: any = Effects.put;

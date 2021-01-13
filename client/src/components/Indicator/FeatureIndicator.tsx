@@ -3,6 +3,7 @@ import { faChargingStation, faFan, faParking, faRestroom, faSmoking, faWifi } fr
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import Feature from '../../types/Feature'
+import { Tag } from 'antd';
 
 interface Props {
     feature: Feature;
@@ -64,12 +65,15 @@ const FeatureIndicator:React.FC<Props> = ({ feature }) => {
     }, [setState])
 
     return (
-        <div className="flex w-max h-8 bg-blue-400 justify-around px-2 py-1 mx-2 rounded-xl">
-            <span className="mr-2">
-                <FontAwesomeIcon icon={ state.icon } color="#fff"/> 
-            </span>
-           <p className="text-white font-bold text-sm vertical-center">{ state.text }</p>
-        </div>
+        <Tag color="#2db7f5">
+            {state.text}
+        </Tag>
+        // <div className="flex w-max h-8 bg-blue-400 justify-around px-2 py-1 mx-2 rounded-xl">
+        //     <span className="mr-2">
+        //         <FontAwesomeIcon icon={ state.icon } color="#fff"/> 
+        //     </span>
+        //    <p className="text-white font-bold text-sm vertical-center">{ state.text }</p>
+        // </div>
     )
 }
 
